@@ -1,6 +1,20 @@
 
-let humanScore = 0;
-let computerScore = 0;
+let humanScore = 1;
+let computerScore = 1;
+
+const piedra = document.getElementById("piedra");
+const papel = document.getElementById("papel");
+const tijera = document.getElementById("tijera");
+
+const resultContainer = document.querySelector(".container-result");
+const humanScoreContainer = document.querySelector(".human-score");
+const computerScoreContainer = document.querySelector(".computer-score");
+
+
+
+
+
+
 
 
 
@@ -22,58 +36,58 @@ function getComputerChoice() {
 
 
 
-function getHumanChoice() {
-    return prompt("Piedra, papel o tijera?");
-}
+
 
 
 function playRound(humanChoice, computerChoice) {
     
-    humanChoice = humanChoice.toLowerCase();
 
-    if (humanChoice == `piedra` && computerChoice == `tijeras`) {
-        console.log(`Ganaste!! La piedra vence a las tijeras`);
-        return humanScore++
+    if (humanChoice == `piedra` && computerChoice == `tijera`) {
+        resultContainer.textContent = `Ganaste!! La piedra vence a las tijeras`;
+        humanScoreContainer.textContent = `Human Score: ${humanScore++}`
     }
     else if (humanChoice == `papel` && computerChoice == `piedra`) {
-        console.log(`Ganaste!! El papel vence a la piedra`);
-        return humanScore++
+        resultContainer.textContent = `Ganaste!! El papel vence a la piedra`;
+        humanScoreContainer.textContent = `Human Score: ${humanScore++}`
     }
-    else if (humanChoice == `tijeras` && computerChoice == `papel`) {
-        console.log(`Ganaste!! Las tijeras vencen al papel`);
-        return humanScore++
+    else if (humanChoice == `tijera` && computerChoice == `papel`) {
+        resultContainer.textContent = `Ganaste!! Las tijeras vencen al papel`;
+        humanScoreContainer.textContent = `Human Score: ${humanScore++}`
+    }
+    else if (humanChoice == `piedra` && computerChoice == `piedra`) {
+        resultContainer.textContent = `Empate!`
+    }
+    else if (humanChoice == `papel` && computerChoice == `papel`) {
+        resultContainer.textContent = `Empate!`
+    }
+    else if (humanChoice == `tijera` && computerChoice == `tijera`) {
+        resultContainer.textContent = `Empate!`
     }
     else {
-        console.log(`Perdiste!! ${computerChoice} vence a ${humanChoice}`);
-        return computerScore++
+        resultContainer.textContent = `Perdiste!! ${computerChoice} vence a ${humanChoice}`;
+        computerScoreContainer.textContent = `Computer Score: ${computerScore++}`
     }
 
 }
 
 
 
-function playGame() {
-    let humanSelection;
-    let computerSelection;
-    
-    for (let i = 0; i <= 4; i++) {
-        
-        humanSelection = getHumanChoice();
-        computerSelection = getComputerChoice();
-
-        playRound(humanSelection, computerSelection);
-    }
-
-    console.log(`Computer Score: ${computerScore}`);
-    console.log(`Human Score: ${humanScore}`);
-}
 
 
 
+piedra.addEventListener("click", () => {
+    let computerAnswer = getComputerChoice();
+    playRound("piedra", computerAnswer);
+})
+
+papel.addEventListener("click", () => {
+    let computerAnswer = getComputerChoice();
+    playRound("papel", computerAnswer);
+})
+
+tijera.addEventListener("click", () => {
+    let computerAnswer = getComputerChoice();
+    playRound("tijera", computerAnswer);
+})
 
 
-
-
-
-
-playGame();
